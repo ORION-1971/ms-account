@@ -12,16 +12,16 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class AccoutnService {
+public class AccountService {
 
     private final AccountRepository repository;
 
     @Autowired
-    public AccoutnService(AccountRepository repository) {
+    public AccountService(AccountRepository repository) {
         this.repository = repository;
     }
 
-    public List<Account> findAll() {                                          // *** ВЫВОД ВСЕХ Users ***
+    public List<Account> findAll() {                                             // *** ВЫВОД ВСЕХ Users ***
         return repository.findAll();
     }
 
@@ -37,7 +37,7 @@ public class AccoutnService {
     }
 
     @Transactional
-    public void delete(Long id) {                                         // *** УДАЛЕНИЕ ***
+    public void delete(Long id) {                                                // *** УДАЛЕНИЕ ***
         repository.deleteById(id);
     }
 
@@ -46,8 +46,8 @@ public class AccoutnService {
         account.setUpdated(LocalDateTime.now());
     }
 
-    public List<Account> getAccountLogin(String login) {                             // SQL   ЗАПРОС
+    public List<Account> getAccountLogin(String login) {                         // SQL   ЗАПРОС
         return repository.getAccount(login);
-        //return repository.getAccountByAgeIsLessThan(login);                      // для параметризованного метода
+        //return repository.getAccountByAgeIsLessThan(login);                    // для параметризованного метода
     }
 }

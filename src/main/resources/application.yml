@@ -10,5 +10,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  liquibase:
+    enabled: true                     # разрешает делать изменения через Liquibase файл
 server:
   port: 8080
