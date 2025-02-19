@@ -1,34 +1,27 @@
 package com.ms_account.mapper;
 
+
 import com.ms_account.dto.AccountDTO;
 import com.ms_account.entity.Account;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
-@Component
-public class AccountMapper {
-    ModelMapper modelMapper = new ModelMapper();
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
+unmappedSourcePolicy = ReportingPolicy.IGNORE)
+public interface AccountMapper {
 
-    public Account convertToAccount(AccountDTO accountDTO) {                            // конвертер Account -> AccountDTO
-        return modelMapper.map(accountDTO, Account.class);
-    }
+   // AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
 
-    public void convertToAccount(AccountDTO accountDTO, Account account) {                 // перенос данных User > UserDTO
-        modelMapper.map(accountDTO, account);
-    }
 
-    public AccountDTO convertToAccountDTO(Account account) {                             // конвертер AccountDTO -> Account
-        return modelMapper.map(account, AccountDTO.class);
-    }
-                                                                                      // конвертер СПИСКА AccountDTO -> Account
-    public List<AccountDTO> listToAccountDTO(List<Account> accountList) {
-        return accountList.stream()
-                .map(account -> modelMapper
-                        .map(account, AccountDTO.class))
-                .collect(Collectors.toList());
-    }
+    Account convertToAccount(AccountDTO accountDTO);                         // конвертер Account -> AccountDTO
+
+    //void convertToAccountA(AccountDTO accountDTO, Account account);           // перенос данных User > UserDTO
+
+    AccountDTO convertToAccountDTO(Account account);                         // конвертер AccountDTO -> Account
+
+    List<AccountDTO> listToAccountDTO(List<Account> accountList);            // конвертер СПИСКА AccountDTO -> Account
 }
