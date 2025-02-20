@@ -10,18 +10,17 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-unmappedSourcePolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface AccountMapper {
 
-   // AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
-
-
     Account convertToAccount(AccountDTO accountDTO);                         // конвертер Account -> AccountDTO
-
-    //void convertToAccountA(AccountDTO accountDTO, Account account);           // перенос данных User > UserDTO
 
     AccountDTO convertToAccountDTO(Account account);                         // конвертер AccountDTO -> Account
 
     List<AccountDTO> listToAccountDTO(List<Account> accountList);            // конвертер СПИСКА AccountDTO -> Account
+
+    default void convertToAccount(AccountDTO accountDTO, Account account) {  // перенос данных User > UserDTO
+        account.setLogin( accountDTO.getLogin() );
+        account.setPassword( accountDTO.getPassword() );
+    }
 }
