@@ -38,7 +38,7 @@ dependencies {
     annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.6.3'
 
 
-    //implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.31.0'
+    implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.31.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
