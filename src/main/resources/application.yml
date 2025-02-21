@@ -11,6 +11,7 @@ spring:
       ddl-auto: update
     show-sql: true
   liquibase:
+    change-log: classpath:/liquibase/changelog-master.yml
     enabled: true                     # разрешает делать изменения через Liquibase файл
 server:
   port: 8080

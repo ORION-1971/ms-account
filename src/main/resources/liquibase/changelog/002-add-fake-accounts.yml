@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-accounts
+      author: Igor
+      changes:
+        - insert:
+            tableName: accounts
+            columns:
+              - column:
+                  name: login
+                  value: 'user1'
+              - column:
+                  name: password
+                  value: 'password1'
+              - column:
+                  name: created
+                  value: NOW()
+        - insert:
+            tableName: accounts
+            columns:
+              - column:
+                  name: login
+                  value: 'user2'
+              - column:
+                  name: password
+                  value: 'password2'
+              - column:
+                  name: created
+                  value: NOW()
+        - insert:
+            tableName: accounts
+            columns:
+              - column:
+                  name: login
+                  value: 'user3'
+              - column:
+                  name: password
+                  value: 'password3'
+              - column:
+                  name: created
+                  value: NOW()
