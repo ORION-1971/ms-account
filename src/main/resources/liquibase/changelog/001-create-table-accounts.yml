@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-accounts
+      author: Igor
+      createTable:
+        schemaName: foo_fighters
+        tableName: accounts
+        columns:
+          - column:
+              name: id
+              type: BIGINT
+              autoIncrement: true
+              constraints:
+                primaryKey: true
+          - column:
+              name: login
+              type: varchar(10)
+          - column:
+              name: password
+              type: varchar(100)
+          - column:
+              name: created
+              type: timestamp(6)
+          - column:
+              name: updated
+              type: timestamp(6)
