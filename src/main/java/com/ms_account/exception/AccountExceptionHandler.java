@@ -13,7 +13,7 @@ public class AccountExceptionHandler {
         AccountIncorrectData data = new AccountIncorrectData();
 
         data.setStatus(HttpStatus.NOT_FOUND.value());
-        data.setMessage(exceptiion.getMessage());
+        data.setMessage(exceptiion.getMessage());                      // "Аккаунта с id - " + id + " не существует!"
         data.setTimestamp(System.currentTimeMillis());
 
         return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);       // 404
@@ -24,9 +24,9 @@ public class AccountExceptionHandler {
         AccountIncorrectData data = new AccountIncorrectData();
 
         data.setStatus(HttpStatus.BAD_REQUEST.value());
-        data.setMessage(exceptiion.getMessage());              //"Неверные данные, введи цифровые значение.");
+        data.setMessage(exceptiion.getMessage());                        // "Неверные данные, введи Integer.");
         data.setTimestamp(System.currentTimeMillis());
 
-        return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);     //400
+        return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);       //400
     }
 }
