@@ -1,6 +1,7 @@
 package com.ms_account.service;
 
 import com.ms_account.entity.Account;
+import com.ms_account.exception.NotFoundException;
 import com.ms_account.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class AccountService {
 
     private final AccountRepository repository;
@@ -27,7 +28,7 @@ public class AccountService {
 
     public Account findById(Long id) {                                           // *** ПОИСК по ID ***
         Optional<Account> account = repository.findById(id);
-        return account.orElse(null);
+        return account.orElseThrow(() -> new NotFoundException("Аккаунта с id - " + id + " не существует!"));
     }
 
     @Transactional
