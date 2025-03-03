@@ -1,32 +1,36 @@
 package com.ms_account.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@Slf4j
+@RestControllerAdvice
 public class AccountExceptionHandler {
 
+    ///----------------------------------- ПЕРВЫЙ СПОСОБ --------------------------------------
     @ExceptionHandler
     public ResponseEntity<AccountIncorrectData> handleAccountException(NotFoundException exceptiion) {
         AccountIncorrectData data = new AccountIncorrectData();
 
-        data.setStatus(HttpStatus.NOT_FOUND.value());
+        log.error(exceptiion.getMessage(), exceptiion);
+
+        data.setStatus(HttpStatus.NOT_FOUND);
         data.setMessage(exceptiion.getMessage());                      // "Аккаунта с id - " + id + " не существует!"
-        data.setTimestamp(System.currentTimeMillis());
 
         return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);       // 404
     }
 
+    ///----------------------------------- ВТОРОЙ СПОСОБ --------------------------------------
     @ExceptionHandler
-    public ResponseEntity<AccountIncorrectData> handleAccountException(Exception exceptiion) {
-        AccountIncorrectData data = new AccountIncorrectData();
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public AccountIncorrectData handleAccountException(Exception exceptiion) {
 
-        data.setStatus(HttpStatus.BAD_REQUEST.value());
-        data.setMessage(exceptiion.getMessage());                        // "Неверные данные, введи Integer.");
-        data.setTimestamp(System.currentTimeMillis());
+        log.error(exceptiion.getMessage(), exceptiion);
 
-        return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);       //400
+        return new AccountIncorrectData(HttpStatus.BAD_REQUEST, exceptiion.getMessage());       //400 "Неверные данные, введи Integer.");
     }
 }
