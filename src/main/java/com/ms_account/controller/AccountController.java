@@ -4,21 +4,18 @@ import com.ms_account.dto.AccountDTO;
 import com.ms_account.entity.Account;
 import com.ms_account.mapper.AccountMapper;
 import com.ms_account.service.AccountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/account")
 public class AccountController {
 
     private final AccountService service;
     private final AccountMapper mapper;
-
-    public AccountController(AccountService service, AccountMapper mapper) {
-        this.service = service;
-        this.mapper = mapper;
-    }
 
     // *** ВЫВОД СПИСКА ***
     @GetMapping()                                                                   // Запрос GET
