@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: addColumn
+      author: ORION
+      changes:
+        - addColumn:
+            tableName: accounts
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: card_id
+                  type: BIGINT
