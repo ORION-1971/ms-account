@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountDTO {                            // РАБОТАЕТ НА УРОВНЕ КОНТРОЛЛЕРА
 
+    private Long userId;
+
+    private Long cardId;
+
     private String login;
 
     private String password;
