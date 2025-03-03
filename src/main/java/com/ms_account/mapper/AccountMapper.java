@@ -20,7 +20,9 @@ public interface AccountMapper {
     List<AccountDTO> listToAccountDTO(List<Account> accountList);            // конвертер СПИСКА AccountDTO -> Account
 
     default void convertToAccount(AccountDTO accountDTO, Account account) {  // перенос данных User > UserDTO
+        account.setUserId(accountDTO.getUserId());
+        account.setCardId(accountDTO.getCardId());
         account.setLogin( accountDTO.getLogin() );
-        account.setPassword( accountDTO.getPassword() );
+        account.setPassword( accountDTO.getPassword());
     }
 }

@@ -20,13 +20,21 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
+
+    @Column(name = "user_id")
+    private Long userId;
+
+    @Column(name = "card_id")
+    private Long cardId;
 
     @Column(name = "login")
     private String login;
 
     @Column(name = "password")
     private String password;
+
+
 
     @CreationTimestamp
     private LocalDateTime created;                   // дата создания аккаунта
