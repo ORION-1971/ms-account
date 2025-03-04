@@ -40,6 +40,9 @@ dependencies {
 
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.31.0'
 
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.4.3'
+
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
