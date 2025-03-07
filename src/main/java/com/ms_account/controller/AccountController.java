@@ -4,6 +4,7 @@ import com.ms_account.dto.AccountDTO;
 import com.ms_account.entity.Account;
 import com.ms_account.mapper.AccountMapper;
 import com.ms_account.service.AccountService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +32,13 @@ public class AccountController {
 
     // *** ДОБАВЛЕНИЕ ***
     @PostMapping()                                                                  // Запрос POST, JSON {"login": "Gunay", "password": Gunay}
-    public Account createAccount(@RequestBody AccountDTO accountDTO) {
+    public Account createAccount(@RequestBody @Valid AccountDTO accountDTO) {
         return service.save(mapper.convertToAccount(accountDTO));
     }
 
     // *** ИЗМЕНЕНИЕ ***
     @PutMapping("/{id}")                                                            // Запрос PUT, в URL /4, JSON {"login": "Gunay", "password": Gunay}
-    public Account updateAccount(@PathVariable Long id, @RequestBody AccountDTO accountDTO) {
+    public Account updateAccount(@PathVariable Long id, @RequestBody @Valid AccountDTO accountDTO) {
         Account account = service.findById(id);
         mapper.convertToAccount(accountDTO, account);
         return service.save(account);
