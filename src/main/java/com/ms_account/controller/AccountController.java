@@ -18,25 +18,25 @@ public class AccountController {
     private final AccountMapper mapper;
 
     // *** ВЫВОД СПИСКА ***
-    @GetMapping()                                                                   // Запрос GET
+    @GetMapping()                                                                                  // Запрос GET
     public List<AccountDTO> getAccount() {
         return mapper.listToAccountDTO(service.findAll());
     }
 
     // *** ПОИСК по ID ***
-    @GetMapping("/{id}")                                                            // Запрос GET, в URL /4
+    @GetMapping("/{id}")                                                                           // Запрос GET, в URL /4
     public AccountDTO findById(@PathVariable Long id) {
         return mapper.convertToAccountDTO(service.findById(id));
     }
 
     // *** ДОБАВЛЕНИЕ ***
-    @PostMapping()                                                                  // Запрос POST, JSON {"login": "Gunay", "password": Gunay}
+    @PostMapping()                                                                                 // Запрос POST, JSON {"login": "Gunay", "password": Gunay}
     public Account createAccount(@RequestBody AccountDTO accountDTO) {
         return service.save(mapper.convertToAccount(accountDTO));
     }
 
     // *** ИЗМЕНЕНИЕ ***
-    @PutMapping("/{id}")                                                            // Запрос PUT, в URL /4, JSON {"login": "Gunay", "password": Gunay}
+    @PutMapping("/{id}")                                                                           // Запрос PUT, в URL /4, JSON {"login": "Gunay", "password": Gunay}
     public Account updateAccount(@PathVariable Long id, @RequestBody AccountDTO accountDTO) {
         Account account = service.findById(id);
         mapper.convertToAccount(accountDTO, account);
@@ -44,13 +44,14 @@ public class AccountController {
     }
 
     // *** УДАЛЕНИЕ ***
-    @DeleteMapping("/{id}")                                                         // Запрос DELETE, в URL /4
+    @DeleteMapping("/{id}")                                                                        // Запрос DELETE, в URL /4
     public void deleteAccount(@PathVariable Long id) {
         service.delete(id);
     }
 
-    @GetMapping("/login/{login}")                                                       // SQL ЗАПРОС
+    @GetMapping("/login/{login}")                                                                  // SQL ЗАПРОС
     public List<Account> getAccountLogin(@PathVariable String login){
         return service.getAccountLogin(login);
     }
+
 }
