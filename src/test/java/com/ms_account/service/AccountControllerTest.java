@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -47,7 +48,7 @@ public class AccountControllerTest {
     List<AccountDTO> accountDTOs = Arrays.asList(accountDTO1, accountDTO2);
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         MockitoAnnotations.openMocks(this); // Инициализация моков
         mockMvc = MockMvcBuilders.standaloneSetup(accountController).build();
     }
@@ -121,7 +122,7 @@ public class AccountControllerTest {
         String accountJson = objectMapper.writeValueAsString(accountDTO);
 
         when(service.findById(1L)).thenReturn(account1);
-        when(mapper.convertToAccount(accountDTO)).thenReturn(account); // TODO
+        when(mapper.convertToAccount(accountDTO)).thenReturn(account);
         when(service.save(account)).thenReturn(account);
 
         // Выполнение запроса на обновление аккаунта
@@ -132,7 +133,7 @@ public class AccountControllerTest {
 
         // Проверка взаимодействий
         verify(service, times(1)).findById(1L);
-        verify(mapper, times(1)).convertToAccount(accountDTO); // TODO
+        verify(mapper, times(1)).convertToAccount(accountDTO);
         verify(service, times(1)).save(account1);
     }
 
@@ -150,7 +151,7 @@ public class AccountControllerTest {
     @Test
     void getAccountLogin() throws Exception {
         // Подготовка данных
-        List<Account> accounts = Arrays.asList(account1);
+        List<Account> accounts = Collections.singletonList(account1);
         when(service.getAccountLogin("testLogin1")).thenReturn(accounts);
 
         // Выполнение запроса для получения аккаунта по логину
