@@ -19,6 +19,12 @@ databaseChangeLog:
               name: password
               type: varchar(100)
           - column:
+              name: user_id
+              type: BIGINT
+          - column:
+              name: card_id
+              type: BIGINT
+          - column:
               name: created
               type: timestamp(6)
           - column:
