@@ -1,10 +1,10 @@
-package com.ms_account.service;
+package com.ms_account.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ms_account.controller.AccountController;
 import com.ms_account.dto.AccountDTO;
 import com.ms_account.entity.Account;
 import com.ms_account.mapper.AccountMapper;
+import com.ms_account.service.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
