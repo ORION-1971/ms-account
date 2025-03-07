@@ -117,13 +117,11 @@ public class AccountControllerTest {
         // Подготовка данных
         ObjectMapper objectMapper = new ObjectMapper();
         AccountDTO accountDTO = new AccountDTO(1L, 1L, "testLoginUpdated", "testPasswordUpdated");
-        Account account= mapper.convertToAccount(accountDTO);
 
         String accountJson = objectMapper.writeValueAsString(accountDTO);
 
         when(service.findById(1L)).thenReturn(account1);
-        when(mapper.convertToAccount(accountDTO)).thenReturn(account);
-        when(service.save(account)).thenReturn(account);
+        when(service.save(account1)).thenReturn(account1);
 
         // Выполнение запроса на обновление аккаунта
         mockMvc.perform(put("/account/1")
@@ -133,7 +131,7 @@ public class AccountControllerTest {
 
         // Проверка взаимодействий
         verify(service, times(1)).findById(1L);
-        verify(mapper, times(1)).convertToAccount(accountDTO);
+        verify(mapper, times(1)).convertToAccount(accountDTO, account1);
         verify(service, times(1)).save(account1);
     }
 
