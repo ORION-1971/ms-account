@@ -19,13 +19,13 @@ public class AccountController {
     private final AccountMapper mapper;
 
     // *** ВЫВОД СПИСКА ***
-    @GetMapping()                                                                   // Запрос GET
+    @GetMapping()                                                                                  // Запрос GET
     public List<AccountDTO> getAccount() {
         return mapper.listToAccountDTO(service.findAll());
     }
 
     // *** ПОИСК по ID ***
-    @GetMapping("/{id}")                                                            // Запрос GET, в URL /4
+    @GetMapping("/{id}")                                                                           // Запрос GET, в URL /4
     public AccountDTO findById(@PathVariable Long id) {
         return mapper.convertToAccountDTO(service.findById(id));
     }
@@ -50,7 +50,7 @@ public class AccountController {
         service.delete(id);
     }
 
-    @GetMapping("/login/{login}")                                                       // SQL ЗАПРОС
+    @GetMapping("/login/{login}")                                                                  // SQL ЗАПРОС
     public List<Account> getAccountLogin(@PathVariable String login){
         return service.getAccountLogin(login);
     }
