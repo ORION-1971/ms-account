@@ -28,10 +28,4 @@ public class AccountIncorrectData {                  // Данные для от
     private final String code;                       // еще один код
     private final String uuid;                       // uuid код ошибки
 
-
-
-
-
-
-
 }
