@@ -13,6 +13,12 @@ databaseChangeLog:
                   name: password
                   value: 'password1'
               - column:
+                  name: user_id
+                  value: "01"
+              - column:
+                  name: card_id
+                  value: "11"
+              - column:
                   name: created
                   value: NOW()
         - insert:
@@ -25,6 +31,12 @@ databaseChangeLog:
                   name: password
                   value: 'password2'
               - column:
+                  name: user_id
+                  value: "02"
+              - column:
+                  name: card_id
+                  value: "22"
+              - column:
                   name: created
                   value: NOW()
         - insert:
@@ -36,6 +48,12 @@ databaseChangeLog:
               - column:
                   name: password
                   value: 'password3'
+              - column:
+                  name: user_id
+                  value: "03"
+              - column:
+                  name: card_id
+                  value: "33"
               - column:
                   name: created
                   value: NOW()
