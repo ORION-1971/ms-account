@@ -24,4 +24,9 @@ public class AccountDTO {                             // РАБОТАЕТ НА �
     @NotBlank(message = "Пароль не может быть пустым")
     private String password;
 
+    public void setPassword(String password) {
+        Password pass = new Password();
+        this.password = pass.encryptPassword(password);
+    }
+
 }
