@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountDTO {                             // РАБОТАЕТ НА УРОВНЕ КОНТРОЛЛЕРА
 
-    @NotNull(message = "userId не прошла проверку")   // Отображение сообщения в консоли
+    @NotNull(message = "userId не корректные данные")   // Отображение сообщения в консоли
     private Long userId;
 
-    @NotNull(message = "cardId не прошла проверку")
+    @NotNull(message = "cardId введи числовое значение")
     private Long cardId;
 
     @NotBlank(message = "Логин не может быть пустым")
