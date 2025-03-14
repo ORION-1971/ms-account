@@ -1,36 +1,36 @@
 package com.ms_account.exception;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Slf4j
 @RestControllerAdvice
 public class AccountExceptionHandler {
 
-    ///----------------------------------- ПЕРВЫЙ СПОСОБ --------------------------------------
-    @ExceptionHandler
-    public ResponseEntity<AccountIncorrectData> handleAccountException(NotFoundException exceptiion) {
-        AccountIncorrectData data = new AccountIncorrectData();
-
-        log.error(exceptiion.getMessage(), exceptiion);
-
-        data.setStatus(HttpStatus.NOT_FOUND);
-        data.setMessage(exceptiion.getMessage());                      // "Аккаунта с id - " + id + " не существует!"
-
-        return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);       // 404
-    }
-
-    ///----------------------------------- ВТОРОЙ СПОСОБ --------------------------------------
-    @ExceptionHandler
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public AccountIncorrectData handleAccountException(Exception exceptiion) {
+    public AccountIncorrectData handleAccountException(MethodArgumentNotValidException ex, HttpServletRequest request) {
 
-        log.error(exceptiion.getMessage(), exceptiion);
+        var processKey = UUID.randomUUID().toString();
+        log.error("Service error, status: uuid: {}, message {}", processKey, ex.getMessage());
 
-        return new AccountIncorrectData(HttpStatus.BAD_REQUEST, exceptiion.getMessage());       //400 "Неверные данные, введи Integer.");
+        return AccountIncorrectData.builder()                  //404 "Неверные данные";
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.BAD_REQUEST.value())        //2 вариант - .status(HttpStatus.BAD_REQUEST)
+                .message(ex.getFieldError().getDefaultMessage())
+                .path(request.getRequestURI())
+                .code("1")
+               // .uuid(processKey)
+                .build();
     }
+
 }

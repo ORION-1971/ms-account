@@ -22,7 +22,23 @@ public interface AccountMapper {
     default void convertToAccount(AccountDTO accountDTO, Account account) {  // перенос данных User > UserDTO
         account.setUserId(accountDTO.getUserId());
         account.setCardId(accountDTO.getCardId());
-        account.setLogin( accountDTO.getLogin() );
-        account.setPassword( accountDTO.getPassword());
+        account.setLogin(accountDTO.getLogin());
+        account.setPassword(accountDTO.getPassword());
     }
+
+//    default AccountDTO convertToAccount(AccountDTO accountDTO) {  // перенос данных User > UserDTO
+//
+//        if ( accountDTO == null ) {
+//            return null;
+//        }
+//
+//        Account account = new Account();
+//
+//        account.setUserId(accountDTO.getUserId());
+//        account.setCardId(accountDTO.getCardId());
+//        account.setLogin(accountDTO.getLogin());
+//        account.setPassword(accountDTO.getPassword());
+//
+//        return convertToAccountDTO(account);
+//    }
 }
