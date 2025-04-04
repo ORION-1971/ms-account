@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountDTO {                             // РАБОТАЕТ НА УРОВНЕ КОНТРОЛЛЕРА
 
-    @NotNull(message = "userId не корректные данные")   // Отображение сообщения в консоли
     private Long userId;
 
     @NotNull(message = "cardId введи числовое значение")
@@ -23,10 +22,5 @@ public class AccountDTO {                             // РАБОТАЕТ НА �
 
     @NotBlank(message = "Пароль не может быть пустым")
     private String password;
-
-    public void setPassword(String password) {
-        Password pass = new Password();
-        this.password = pass.encryptPassword(password);
-    }
 
 }

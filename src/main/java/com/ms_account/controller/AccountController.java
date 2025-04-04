@@ -44,6 +44,8 @@ public class AccountController {
     @PutMapping("/{id}")                                                            // Запрос PUT, в URL /4, JSON {"login": "Gunay", "password": Gunay}
     public Account updateAccount(@PathVariable Long id, @RequestBody @Valid AccountDTO accountDTO) {
         Account account = service.findById(id);
+        String encodedPassword = userService.encodePassword(accountDTO.getPassword());
+        accountDTO.setPassword(encodedPassword);
         mapper.convertToAccount(accountDTO, account);
         return service.save(account);
     }
